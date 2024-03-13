@@ -8,7 +8,7 @@ urlpatterns = [
     path('breakfast-update/<str:pk>/', views.BreakfastEditView.as_view(), name='breakfast-update'),
     path('breakfast-delete/<str:pk>/', views.BreakfastDeleteView.as_view(), name='breakfast-delete'),
 
-    path('lunch/', views.LunchView.as_view(), name='lunchpath-list'),
+    path('lunch/', views.LunchView.as_view(), name='lunch-list'),
     path('lunch/<str:pk>/', views.LunchDetailView.as_view(), name='lunch-detail'),
     path('lunch-create/', views.LunchCreateView.as_view(), name='lunch-detail'),
     path('lunch/<str:pk>/', views.LunchDetailView.as_view(), name='lunch-detail'),
