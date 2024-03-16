@@ -65,14 +65,14 @@ export const lunchDetailsReducer = (state = { lunch: {} }, action) => {
             return {
                 ...state,
                 loading: true,
-                product: {},        // always pass the object during the request
+                lunch: {},        // always pass the object during the request
                 error: ""
             }
         case LUNCH_DETAILS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                product: action.payload,
+                lunch: action.payload,
                 error: ""
             }
         case LUNCH_DETAILS_FAIL:
@@ -93,7 +93,7 @@ export const createLunchReducer = (state = { lunch: {} }, action) => {
             return {
                 ...state,
                 loading: true,
-                product: {},
+                lunch: {},
                 success: false,
                 error: ""
             }
@@ -102,7 +102,7 @@ export const createLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: true,
-                product: action.payload,
+                lunch: action.payload,
                 error: ""
             }
         case CREATE_LUNCH_FAIL:
@@ -110,7 +110,7 @@ export const createLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                lunch: {},
                 error: action.payload
             }
         case CREATE_LUNCH_RESET:
@@ -118,7 +118,7 @@ export const createLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                lunch: {},
                 error: ""
             }
         default:
@@ -133,7 +133,7 @@ export const updateLunchReducer = (state = { lunch: {} }, action) => {
             return {
                 ...state,
                 loading: true,
-                product: {},
+                lunch: {},
                 success: false,
                 error: ""
             }
@@ -142,7 +142,7 @@ export const updateLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: true,
-                product: action.payload,
+                lunch: action.payload,
                 error: ""
             }
         case UPDATE_LUNCH_FAIL:
@@ -150,7 +150,7 @@ export const updateLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                lunch: {},
                 error: action.payload
             }
         case UPDATE_LUNCH_RESET:
@@ -158,7 +158,7 @@ export const updateLunchReducer = (state = { lunch: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                lunch: {},
                 error: ""
             }
         default:

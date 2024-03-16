@@ -1,0 +1,89 @@
+import React from 'react';
+import { VerticalTimelineElement } from "react-vertical-timeline-component";
+import { Link } from 'react-router-dom';
+import { fadeIn } from "../utils/motion";
+import CartButton from './CartButton';
+import BuyButton from './BuyButton';
+import { connect } from 'react-redux';
+
+const LunchCard = ({ index, lunch }) => {
+  const baseUrl = 'http://localhost:8000';
+  const fullImageUrl = baseUrl + lunch.image;
+
+  return (
+    <VerticalTimelineElement
+      className="vertical-timeline-element--work"
+      contentStyle={{ background: '#1d1836', color: '#fff' }}
+      contentArrowStyle={{ borderRight: '7px solid #232631' }}
+      iconStyle={{ background: '#2f2e41', color: '#fff' }}
+      icon={<img src={fullImageUrl} alt="Lunch" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+    >
+      <div>
+        <Link to={lunch.id}>
+          <h3 className="vertical-timeline-element-title text-white text-[20px] font-bold">{lunch.name}</h3>
+        </Link>
+        <h3 className="text-white text-[20px] font-bold">KSH {lunch.price}</h3>
+        <div>
+          <CartButton lunch={lunch} />
+          <Link to={lunch.id}>
+            <BuyButton />
+          </Link>
+        </div>
+      </div>
+    </VerticalTimelineElement>
+  );
+};
+
+export default connect(null, {})(LunchCard);
+
+
+
+
+// MenuLunch.jsx
+import React from 'react';
+import { VerticalTimeline } from 'react-vertical-timeline-component';
+import LunchCard from './LunchCard';
+
+const MenuLunch = ({ lunchList }) => {
+  return (
+    <VerticalTimeline>
+      {lunchList.map((lunch, index) => (
+        <LunchCard key={lunch.id} index={index} lunch={lunch} />
+      ))}
+    </VerticalTimeline>
+  );
+};
+
+export default MenuLunch;
+
+
+<div className="w-3/4 bg-secondary">
+      <motion.div
+        variants={fadeIn("right", "spring", index * 0.5, 0.75)}
+        className="w-full bg-gradient-to-br from-zinc-900 to-indigo-600 p-[1px] rounded-[20px] shadow-card"
+        style={{
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center', 
+        }}
+      >
+        <Link to={lunch.id}>
+          <img
+            src={fullImageUrl}
+            className="w-full h-auto rounded-t-lg" // Set image width to full width and height to auto
+            alt="Lunch" // Changed alt text from "Breakfast" to "Lunch"
+          />
+        </Link>
+        <div
+          className="bg-secondary py-5 px-12 flex justify-evenly  flex-col"
+        >
+          <h3 className="text-white text-[20px] font-bold">{lunch.name}</h3>
+          <h3 className="text-white text-[20px] font-bold">KSH {lunch.price}</h3> {/* Changed from breakfast.price to lunch.price */}
+          <div>
+            <CartButton lunch={lunch} />
+            <Link to={lunch.id}>
+              <BuyButton />
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    </div>
