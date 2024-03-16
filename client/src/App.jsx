@@ -6,9 +6,9 @@ import { AccountPage, AccountUpdate, AddressUpdatePage, AllAddressesOfUserPage, 
 const App = () => {
   return (
     <Router> {/* Wrap everything inside a Router */}
-      <div className='relative z-o bg-primary font-noto'>
+      <div className='z-0 bg-secondary font-noto'>
         <Navbar/>
-        <div className='container mx-auto px-4 mt-4'>
+        
           <Routes>
             <Route path='/' element={<Home />} exact/>
             <Route path='/list-menu/' element={<MenuListPage/>} exact/>
@@ -28,7 +28,6 @@ const App = () => {
             <Route path='/cart' element={<CartPage/>} exact/>
             <Route element={<NotFoundPage/>} /> {/* No path specified for NotFoundPage */}
           </Routes>
-        </div>
       </div>
     </Router>
   );

@@ -16,6 +16,7 @@ import OrderListPage from "./OrderListPage"
 import PaymentStatus from "./PaymentStatus"
 import RegisterPage from "./RegisterPage"
 import Login from "./Login"
+import Error from '../components/Error'
 
 export {
     AccountPage,
@@ -36,4 +37,5 @@ export {
     PaymentStatus,
     RegisterPage,
     Login,
+    Error
 }

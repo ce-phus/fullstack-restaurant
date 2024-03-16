@@ -74,7 +74,7 @@ const allReducers =combineReducers({
     getAllOrdersReducer,
     mpesaCallbackHandlerReducer,
     mpesaStkPushReducer,
-    cartReducer,
+    cart: cartReducer,
     lunchListReducer,
     lunchDetailsReducer,
     createLunchReducer,

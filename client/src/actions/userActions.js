@@ -101,7 +101,7 @@ import {
   }
   
   // Register
-  export const register = (username, email, password) => async (dispatch) => {
+  export const register = (username, first_name, last_name, email, password, confirm_password) => async (dispatch) => {
     try {
         dispatch({ type: USER_REGISTER_REQUEST })
   
@@ -112,10 +112,10 @@ import {
         }
   
         const { data } = await axios.post(`http://127.0.0.1:8000/account/register/`,
-            { 'username': username, 'email': email, 'password': password },
+            { 'username': username, 'first_name': first_name, 'last_name': last_name, 'email': email, 'password': password, "confirm_password":confirm_password},
             config
         )
-  
+        // console.log("User Info: ",data)
         dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data
