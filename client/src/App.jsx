@@ -11,7 +11,7 @@ const App = () => {
         
           <Routes>
             <Route path='/' element={<Home />} exact/>
-            <Route path='/list-menu/' element={<MenuListPage/>} exact/>
+            <Route path='/menu/' element={<MenuListPage/>} exact/>
             <Route path='/create-menu/' element={<MenuCreatePage/>} exact/>
             <Route path='/menu/:id/' element={ <MenuDetailsPage/> } exact/>
             <Route path='/menu-update/:id/' element={<MenuUpdatePage/>} exact/>

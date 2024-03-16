@@ -35,7 +35,13 @@ export const getBreakfastList = () => async (dispatch) => {
         })
 
         // call api
-        const { data } = await axios.get("/menu/breakfast/")
+        const { data } = await axios.get("http://127.0.0.1:8000/menu/breakfast/", {
+            method: 'POST',
+            mode: 'cors',
+            headers:{
+                'Content-type': 'application/json'
+            }
+        })
         dispatch({
             type: BREAKFAST_LIST_SUCCESS,
             payload: data

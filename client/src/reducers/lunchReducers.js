@@ -29,21 +29,21 @@ import {
 
 } from "../constants/index"
 
-// lunch list
+// lunch list reducer
 export const lunchListReducer = (state = { lunch: [] }, action) => {
     switch (action.type) {
         case LUNCH_LIST_REQUEST:
             return {
                 ...state,
                 loading: true,
-                products: [],   // always pass the object during the request
+                lunch: [], // Corrected from products to lunch
                 error: ""
             }
         case LUNCH_LIST_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                products: action.payload,
+                lunch: action.payload, // Corrected from products to lunch
                 error: ""
             }
         case LUNCH_LIST_FAIL:
@@ -56,6 +56,7 @@ export const lunchListReducer = (state = { lunch: [] }, action) => {
             return state
     }
 }
+
 
 // Lunch details
 export const lunchDetailsReducer = (state = { lunch: {} }, action) => {

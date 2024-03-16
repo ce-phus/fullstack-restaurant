@@ -36,14 +36,14 @@ export const dinnerListReducer = (state = { dinner: [] }, action) => {
             return {
                 ...state,
                 loading: true,
-                products: [],   // always pass the object during the request
+                dinner: [],   // always pass the object during the request
                 error: ""
             }
         case DINNER_LIST_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                products: action.payload,
+                dinner: action.payload,
                 error: ""
             }
         case DINNER_LIST_FAIL:
@@ -65,14 +65,14 @@ export const dinnerDetailsReducer = (state = { dinner: {} }, action) => {
             return {
                 ...state,
                 loading: true,
-                product: {},        // always pass the object during the request
+                dinner: {},        // always pass the object during the request
                 error: ""
             }
         case DINNER_DETAILS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                product: action.payload,
+            dinner: action.payload,
                 error: ""
             }
         case DINNER_DETAILS_FAIL:
@@ -87,13 +87,13 @@ export const dinnerDetailsReducer = (state = { dinner: {} }, action) => {
 }
 
 // create dinner reducer
-export const createDinnerReducer = (state = { product: {} }, action) => {
+export const createDinnerReducer = (state = {dinner: {} }, action) => {
     switch (action.type) {
         case CREATE_DINNER_REQUEST:
             return {
                 ...state,
                 loading: true,
-                product: {},
+                dinner: {},
                 success: false,
                 error: ""
             }
@@ -102,7 +102,7 @@ export const createDinnerReducer = (state = { product: {} }, action) => {
                 ...state,
                 loading: false,
                 success: true,
-                product: action.payload,
+                dinner: action.payload,
                 error: ""
             }
         case CREATE_DINNER_FAIL:
@@ -110,7 +110,7 @@ export const createDinnerReducer = (state = { product: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                dinner: {},
                 error: action.payload
             }
         case CREATE_DINNER_RESET:
@@ -118,7 +118,7 @@ export const createDinnerReducer = (state = { product: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+                dinner: {},
                 error: ""
             }
         default:
@@ -133,7 +133,7 @@ export const updateDinnerReducer = (state = { dinner: {} }, action) => {
             return {
                 ...state,
                 loading: true,
-                product: {},
+                dinner: {},
                 success: false,
                 error: ""
             }
@@ -142,7 +142,7 @@ export const updateDinnerReducer = (state = { dinner: {} }, action) => {
                 ...state,
                 loading: false,
                 success: true,
-                product: action.payload,
+                dinner: action.payload,
                 error: ""
             }
         case UPDATE_DINNER_FAIL:
@@ -150,7 +150,7 @@ export const updateDinnerReducer = (state = { dinner: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+            dinner: {},
                 error: action.payload
             }
         case UPDATE_DINNER_RESET:
@@ -158,7 +158,7 @@ export const updateDinnerReducer = (state = { dinner: {} }, action) => {
                 ...state,
                 loading: false,
                 success: false,
-                product: {},
+            dinner: {},
                 error: ""
             }
         default:

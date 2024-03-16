@@ -34,7 +34,14 @@ export const getDinnerList =() => async (dispatch) => {
         })
 
         // call api
-        const { data } = await axios.get("/menu/dinner/")
+        const { data } = await axios.get("http://127.0.0.1:8000/menu/dinner/", {
+            method: 'POST',
+            mode: 'cors',
+            headers:{
+                'Content-type': 'application/json'
+            }
+        })
+        console.log("Dinner data: ", data)
         dispatch({
             type:DINNER_LIST_SUCCESS,
             payload: data

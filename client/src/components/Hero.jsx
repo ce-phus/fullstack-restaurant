@@ -1,6 +1,7 @@
 import React from 'react'
 import { styles } from '../styles'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 // import { fadeIn, textVariant } from "../utils/motion"
 
 const Hero = () => {
@@ -24,7 +25,9 @@ const Hero = () => {
         </div>
         <div className='mt-auto'>
             <div className='pt-6 flex items-center justify-center absolute left-0 right-0 bottom-7'>
+                <Link to="/menu">
                 <button className='block bg-transparent border border-4 border-accent tracking-wide px-3 py-4 text-4xl hover:text-secondary hover:bg-accent font-bold'>View All Menu</button>
+                </Link>
             </div>
         </div>
     </section>
