@@ -4,7 +4,7 @@ import {
     breakfastDetailReducer,
     createbreakfastReducer,
     updatebreakfastReducer,
-    deleteProductReducer,
+    deleteBreakfastReducer,
     changeDeliveryStatusReducer,
 } from "./breakfastReducers"
 
@@ -53,7 +53,7 @@ const allReducers =combineReducers({
     breakfastDetailReducer,
     createbreakfastReducer,
     updatebreakfastReducer,
-    deleteProductReducer,
+    deleteBreakfastReducer,
     changeDeliveryStatusReducer,
     dinnerListReducer,
     dinnerDetailsReducer,

@@ -25,7 +25,7 @@ const MenuLunch = ({ lunchList }) => {
         Explore our delicious lunch options below. Whether you're in the mood for a light salad or a hearty bowl, our lunch menu has something for everyone.
       </motion.p>
 
-      <div className='mt-20 flex grid grid-cols-1 md:grid-cols-3 gap-5'>
+      <div className='mt-20 flex grid grid-cols-1 lg:grid-cols-3 gap-5'>
         {lunchList.map((lunch, index) => (
           <LunchCard key={lunch.id} index={index} lunch={lunch} />
         ))}

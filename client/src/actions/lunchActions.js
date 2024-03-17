@@ -64,13 +64,16 @@ export const getLunchDetails = (id) => async (dispatch) => {
         })
 
         // call api
-        const { data } = await axios.get(`/menu/lunch/${id}/`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/menu/lunch/${id}/`)
+        console.log("Lunch ID:");
+
 
         dispatch({
             type: LUNCH_DETAILS_SUCCESS,
             payload: data
         })
     } catch (error) {
+        console.error("Error fetching lunch details:", error);
         dispatch({
             type: LUNCH_DETAILS_FAIL,
             payload:error.message
@@ -100,7 +103,7 @@ export const createlunch = (lunch) => async (dispatch, getstate) => {
 
         // api call
         const { data } = await axios.post(
-            '/menu/lunch-create/',
+            'http://127.0.0.1:8000/menu/lunch-create/',
             lunch,
             config
         )
@@ -139,7 +142,7 @@ export const deletelunch = (id) => async (dispatch, getstate) => {
 
         // api call
         const { data } = await axios.delete(
-            `/menu/lunch-delete/${id}`,
+            `http://127.0.0.1:8000/menu/lunch-delete/${id}`,
             config
         )
 
@@ -177,7 +180,7 @@ export const updatelunch = (id, lunch) => async (dispatch, getstate) => {
 
         // api call
         const { data } = await axios.post(
-            `/menu/lunch-create/${id}/`,
+            `http://127.0.0.1:8000/menu/lunch-create/${id}/`,
             lunch,
             config
         )
@@ -216,7 +219,7 @@ export const changeDeliveryStatus = (id, lunch) => async (dispatch, getState) =>
 
         // api call
         const { data } = await axios.put(
-            `/account/change-order-status/${id}/`,
+            `http://127.0.0.1:8000/account/change-order-status/${id}/`,
             lunch,
             config
         )

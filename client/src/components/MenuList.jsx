@@ -21,7 +21,7 @@ const MenuList = ({ breakfastList, lunchList }) => {
         Indulge in a delectable morning feast with our exquisite breakfast menu. From hearty classics to tantalizing specialties, our carefully crafted dishes are designed to awaken your taste buds and set the perfect tone for your day. Whether you prefer sweet or savory, there's something to satisfy every craving. Join us for a culinary journey that celebrates the art of breakfast.
       </motion.p>
 
-      <div className='mt-20 flex grid grid-cols-1 md:grid-cols-3 gap-5'>
+      <div className='mt-20 flex grid grid-cols-1 lg:grid-cols-3 gap-5'>
         {breakfastList.map((breakfast, index) => (
           <BreakfastCard key={breakfast.id} index={index} breakfast={breakfast} />
         ))}

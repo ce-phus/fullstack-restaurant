@@ -20,7 +20,7 @@ const DinnerCard = ({ index, dinner }) => {
         backgroundPosition: 'center', 
       }}
     >
-      <Link to={dinner.id}>
+      <Link to={`/dinner/${dinner.id}`}>
           <img
             src={fullImageUrl}
             className="w-full h-auto rounded-t-lg" // Set image width to full width and height to auto

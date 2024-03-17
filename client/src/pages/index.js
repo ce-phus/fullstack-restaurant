@@ -9,7 +9,7 @@ import Menu from "./Menu"
 import CheckoutPage from './CheckoutPage'
 import MenuListPage from "./MenuListPage"
 import MenuCreatePage from "./MenuCreatePage"
-import MenuDetailsPage from "./MenuDetailsPage"
+import MenuDetailsPage from "./LunchDetailsPage"
 import MenuUpdatePage from "./MenuUpdatePage"
 import NotFoundPage from "./NotFoundPage"
 import OrderListPage from "./OrderListPage"
@@ -17,6 +17,8 @@ import PaymentStatus from "./PaymentStatus"
 import RegisterPage from "./RegisterPage"
 import Login from "./Login"
 import Error from '../components/Error'
+import BreakfastDetailsPage from './BreakfastDetailsPage'
+import DinnerDetailsPage from './DinnerDetailsPage'
 
 export {
     AccountPage,
@@ -37,5 +39,7 @@ export {
     PaymentStatus,
     RegisterPage,
     Login,
-    Error
+    Error, 
+    BreakfastDetailsPage,
+    DinnerDetailsPage
 }

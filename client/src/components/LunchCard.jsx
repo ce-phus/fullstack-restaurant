@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 const LunchCard = ({ index, lunch }) => {
   const baseUrl = 'http://localhost:8000';
-  const fullImageUrl = baseUrl + lunch.image; // Corrected from breakfast.image
+  const fullImageUrl = baseUrl + lunch.image; 
 
   return (
     <div className="w-3/4 bg-secondary">
@@ -20,21 +20,21 @@ const LunchCard = ({ index, lunch }) => {
           backgroundPosition: 'center', 
         }}
       >
-        <Link to={lunch.id}>
+        <Link to={`/lunch/${lunch.id}`}>
           <img
             src={fullImageUrl}
-            className="w-full h-auto rounded-t-lg" // Set image width to full width and height to auto
-            alt="Lunch" // Changed alt text from "Breakfast" to "Lunch"
+            className="w-full h-auto rounded-t-lg w-[500px] h-[400px]" 
+            alt="Lunch" 
           />
         </Link>
         <div
           className="bg-secondary py-5 px-12 flex justify-evenly  flex-col"
         >
           <h3 className="text-white text-[20px] font-bold">{lunch.name}</h3>
-          <h3 className="text-white text-[20px] font-bold">KSH {lunch.price}</h3> {/* Changed from breakfast.price to lunch.price */}
+          <h3 className="text-white text-[20px] font-bold">KSH {lunch.price}</h3> 
           <div>
             <CartButton lunch={lunch} />
-            <Link to={lunch.id}>
+            <Link to={`/lunch/${lunch.id}`}>
               <BuyButton />
             </Link>
           </div>

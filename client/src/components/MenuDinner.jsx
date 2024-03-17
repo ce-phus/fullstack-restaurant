@@ -21,7 +21,7 @@ const MenuDinner = ({ dinnerList}) => {
             Indulge in a delightful evening culinary experience with our exquisite dinner menu. Crafted with passion and expertise, each dish is a symphony of flavors and textures, carefully curated to tantalize your taste buds and leave you craving for more. From succulent grilled meats to savory pasta dishes, our menu offers a diverse selection to cater to every palate. Whether you're seeking a romantic dinner for two or a gathering with friends and family, our restaurant provides the perfect ambiance for a memorable dining experience. Join us for dinner and embark on a culinary journey that celebrates the art of fine dining.
           </motion.p>
     
-          <div className='mt-20 flex grid grid-cols-1 md:grid-cols-3 gap-5'>
+          <div className='mt-20 flex grid grid-cols-1 lg:grid-cols-3 gap-5'>
             {dinnerList.map((dinner, index) => (
               <DinnerCard key={dinner.id} index={index} dinner={dinner} />
             ))}

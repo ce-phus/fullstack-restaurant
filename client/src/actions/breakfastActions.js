@@ -61,7 +61,7 @@ export const getBreakfastDetails = (id) => async (dispatch) =>{
         })
 
         // call api
-        const { data } = await axios.get(`/menu/breakfast/${id}`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/menu/breakfast/${id}`)
         dispatch({
             type: BREAKFAST_DETAILS_SUCCESS,
             payload: data
@@ -93,7 +93,7 @@ export const createbreakfast = (breakfast) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(
-            "menu/breakfast-create/",
+            "http://127.0.0.1:8000/menu/breakfast-create/",
             breakfast,
             config
         )
@@ -130,7 +130,7 @@ export const deletebreakfast = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `menu/breakfast-delete/${id}`,
+            `http://127.0.0.1:8000/menu/breakfast-delete/${id}`,
             config
         )
 
@@ -166,7 +166,7 @@ export const updatebreakfast = (id, breakfast) => async (dispatch, getState) => 
         }
 
         const { data } = await axios.post(
-            `menu/breakfast-update/${id}`,
+            `http://127.0.0.1:8000/menu/breakfast-update/${id}`,
             breakfast,
             config
         )
@@ -205,7 +205,7 @@ export const changeDeliveryStatus = (id, breakfast) => async (dispatch, getState
 
         // api call
         const { data } = await axios.put(
-            `/account/change-order-status/${id}/`,
+            `http://127.0.0.1:8000/account/change-order-status/${id}/`,
             breakfast,
             config
         )

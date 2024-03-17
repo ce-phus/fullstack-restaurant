@@ -62,7 +62,7 @@ export const getDinnerDetails = (id) => async (dispatch) => {
         })
 
         // CALL API
-        const { data } = await axios.get(`/menu/lunch/${id}/`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/menu/lunch/${id}/`)
         dispatch({
             type: DINNER_DETAILS_SUCCESS,
             payload: data
@@ -95,7 +95,7 @@ export const createDinner = (dinner) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(
-            "/menu/dinner-create/",
+            "http://127.0.0.1:8000/menu/dinner-create/",
             dinner,
             config
         )
@@ -131,7 +131,7 @@ export const deleteDinner = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `/menu/dinner-delete/${id}/`,
+            `http://127.0.0.1:8000/menu/dinner-delete/${id}/`,
             config
         )
         dispatch({
@@ -166,7 +166,7 @@ export const updateDinner = (id, dinner) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(
-            `/menu/dinner-update/${id}/`,
+            `http://127.0.0.1:8000/menu/dinner-update/${id}/`,
             dinner,
             config
         )
@@ -204,7 +204,7 @@ export const changeDeliveryStatus = (id, dinner) => async (dispatch, getState) =
 
         // api call
         const { data } = await axios.put(
-            `/account/change-order-status/${id}/`,
+            `http://127.0.0.1:8000/account/change-order-status/${id}/`,
             dinner,
             config
         )

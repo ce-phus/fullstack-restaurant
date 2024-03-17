@@ -165,8 +165,8 @@ export const updatebreakfastReducer =( state ={ breakfast: {} }, action) => {
     }
 }
 
-// delete product reducer
-export const deleteProductReducer = (state = {}, action) => {
+// delete breakfast reducer
+export const deleteBreakfastReducer = (state = {}, action) => {
     switch (action.type) {
         case DELETE_BREAKFAST_REQUEST:
             return {
