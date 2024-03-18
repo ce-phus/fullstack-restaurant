@@ -11,18 +11,20 @@ import {
     GET_TOTAL_PRICE_FAIL
 } from '../constants/index';
 
-export const addToCart = (product, quantity, override_quantity) => async (dispatch) => {
+export const addToCart = (item_type, item_id, quantity) => async (dispatch) => {
     try {
         dispatch({ type: ADD_TO_CART_REQUEST });
         
-
-        const { data } = await axios.post('http://127.0.0.1:8000/api/cart/', {
-            product: product,
+        const payload = {
+            action: 'add_item',       // Specify the action as 'add_item'
+            type: item_type,          // Pass the item_type to the payload
+            id: item_id,              // Assuming item_id is the ID of the item to be added
             quantity: quantity,
-            override_quantity: override_quantity
-        });
-        console.log("Data:", data)
+            // override_quantity: override_quantity
+        };
 
+        const { data } = await axios.post('http://127.0.0.1:8000/menu/cart/', payload);
+        
         dispatch({
             type: ADD_TO_CART_SUCCESS,
             payload: data
@@ -30,77 +32,51 @@ export const addToCart = (product, quantity, override_quantity) => async (dispat
 
         dispatch(getTotalPrice());
     } catch (error) {
-        if (error.response && error.response.data) {
-            dispatch({
-                type: ADD_TO_CART_FAIL,
-                payload: error.response.data.detail || error.message
-            });
-        } else {
-            dispatch({
-                type: ADD_TO_CART_FAIL,
-                payload: 'An error occurred while processing your request.'
-            });
-        }
+        // Error handling code
     }
 };
 
-export const removeFromCart = (productId) => async (dispatch) => {
+
+export const removeFromCart = (item_id) => async (dispatch) => {
     try {
         dispatch({ type: REMOVE_FROM_CART_REQUEST });
 
-        console.log("Removing product with ID:", productId);
-
         const payload = {
-            remove: true,
-            product_id: productId
+            action: 'remove_item',  // Specify the action as 'remove_item'
+            id: item_id           
         };
 
-        console.log("Request payload:", payload);
-
-        const { data } = await axios.post('http://127.0.0.1:8000/api/cart/', payload);
-
-        console.log("Remove from cart response:", data);
-
-        if (data && data.hasOwnProperty('cart_total_price')) {
-            dispatch({
-                type: REMOVE_FROM_CART_SUCCESS,
-                payload: data
-            });
-
-            dispatch(getTotalPrice());
-        } else {
-            console.log("Invalid response data received:", data);
-            dispatch({
-                type: REMOVE_FROM_CART_FAIL,
-                payload: 'Invalid response data received'
-            });
-        }
-    } catch (error) {
-        console.error("Error removing from cart:", error);
+        const { data } = await axios.post('http://127.0.0.1:8000/menu/cart/', payload);
 
         dispatch({
-            type: REMOVE_FROM_CART_FAIL,
+            type: REMOVE_FROM_CART_SUCCESS,
+            payload: data
+        });
+
+        dispatch(getTotalPrice());
+    } catch (error) {
+        // Error handling code
+        dispatch({ type: REMOVE_FROM_CART_FAILURE, payload: error.message });
+    }
+};
+
+
+
+
+export const getTotalPrice = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_TOTAL_PRICE_REQUEST });
+
+        const { data } = await axios.get('http://127.0.0.1:8000/menu/cart/');
+
+        dispatch({
+            type: GET_TOTAL_PRICE_SUCCESS,
+            payload: data.total_price
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_TOTAL_PRICE_FAIL,
             payload: error.response.data.detail || error.message
         });
     }
 };
-
-
-
-// export const getTotalPrice = () => async (dispatch) => {
-//     try {
-//         dispatch({ type: GET_TOTAL_PRICE_REQUEST });
-
-//         const { data } = await axios.get('http://127.0.0.1:8000/api/cart/');
-
-//         dispatch({
-//             type: GET_TOTAL_PRICE_SUCCESS,
-//             payload: data.cart_total_price
-//         });
-//     } catch (error) {
-//         dispatch({
-//             type: GET_TOTAL_PRICE_FAIL,
-//             payload: error.response.data.detail || error.message
-//         });
-//     }
-// };

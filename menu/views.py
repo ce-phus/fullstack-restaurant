@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from rest_framework.decorators import permission_classes
 
+from django.http import HttpRequest 
+
 from .service import CartService
 
 class BreakfastView(APIView):
@@ -219,41 +221,62 @@ class DinnerEditView(APIView):
         else:
             return Response({"detail": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         
-class CartAPIView(APIView):
-    def post(self, request):
-        """
-        Add or remove item from cart
-        """
-        action = request.data.get('action')  # 'add_item' or 'remove_item'
-        item_type = request.data.get('type')
-        item_id = request.data.get('id')
-        quantity = int(request.data.get('quantity', 1))
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .service import CartService
 
+class CartAPIView(APIView):
+    """
+    Single API to handle cart operations
+    """
+
+    def get(self, request, format=None):
         cart_service = CartService(request)
+        cart_items = list(cart_service)  # Retrieve cart items with details
+        total_price = cart_service.get_total_price()
+        return Response({'cart_items': cart_items, 'total_price': total_price}, status=status.HTTP_200_OK)
+
+    def post(self, request, **kwargs):
+        cart_service = CartService(request)
+
+        action = request.data.get('action')
 
         if action == 'add_item':
+            item_type = request.data.get('type')
+            item_id = request.data.get('id')
+            quantity = int(request.data.get('quantity', 1))
+
             cart_service.add_item(item_type, item_id, quantity)
-            return Response({'detail': 'Item added to cart'}, status=status.HTTP_200_OK)
+
+            # Retrieve the added item details
+            if item_type == 'breakfast':
+                item = Breakfast.objects.get(id=item_id)
+                serializer = BreakfastSerializer(item)
+            elif item_type == 'lunch':
+                item = Lunch.objects.get(id=item_id)
+                serializer = LunchSerializer(item)
+            elif item_type == 'dinner':
+                item = Dinner.objects.get(id=item_id)
+                serializer = DinnerSerializer(item)
+            else:
+                return Response({'detail': 'Invalid item type'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Recalculate total price after adding the item
+            total_price = cart_service.get_total_price()
+
+            return Response({'detail': 'Item added to cart', 'item': serializer.data, 'total_price': str(total_price)}, status=status.HTTP_200_OK)
+
         elif action == 'remove_item':
+            item_id = request.data.get('id')
             cart_service.remove_item(item_id)
-            return Response({'detail': 'Item removed from cart'}, status=status.HTTP_200_OK)
+            # Recalculate total price after removing the item
+            total_price = cart_service.get_total_price()
+            return Response({'detail': 'Item removed from cart', 'total_price': str(total_price)}, status=status.HTTP_200_OK)
+
+        elif action == 'clear_cart':
+            cart_service.clear_cart()
+            return Response({'detail': 'Cart cleared', 'total_price': 0}, status=status.HTTP_200_OK)
+
         else:
             return Response({'detail': 'Invalid action'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-    def get(self, request):
-        """
-        Get total price of items in cart
-        """
-        cart_service = CartService(request)
-        total_price = cart_service.get_total_price()
-        return Response({'total_price': total_price}, status=status.HTTP_200_OK)
-
-    def put(self, request):
-        """
-        Clear cart
-        """
-        cart_service = CartService(request)
-        cart_service.clear_cart()
-        return Response({'detail': 'Cart cleared'}, status=status.HTTP_200_OK)

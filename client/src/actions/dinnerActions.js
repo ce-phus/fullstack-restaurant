@@ -41,7 +41,7 @@ export const getDinnerList =() => async (dispatch) => {
                 'Content-type': 'application/json'
             }
         })
-        console.log("Dinner data: ", data)
+        // console.log("Dinner data: ", data)
         dispatch({
             type:DINNER_LIST_SUCCESS,
             payload: data

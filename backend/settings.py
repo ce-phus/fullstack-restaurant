@@ -22,14 +22,20 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-env = environ.Env(DEBUG=(bool, False))
+# env = environ.Env(DEBUG=(bool, False))
 
 # reading .env file
-environ.Env.read_env()
+# environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ENV_FILE = BASE_DIR / '.env'
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env(ENV_FILE)
+
 
 
 # Quick-start development settings - unsuitable for production

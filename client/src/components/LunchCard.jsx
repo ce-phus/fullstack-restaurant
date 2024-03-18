@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { fadeIn } from "../utils/motion";
 import CartButton from './CartButton';
 import BuyButton from './BuyButton';
 import { connect } from 'react-redux';
+import { addToCart } from '../actions/cartActions';
 
-const LunchCard = ({ index, lunch }) => {
+const LunchCard = ({ index, lunch, addToCart }) => {
   const baseUrl = 'http://localhost:8000';
   const fullImageUrl = baseUrl + lunch.image; 
+  const [quantity, setQuantity] = useState(1); // State to manage quantity
+    // const [overrideQuantity, setOverrideQuantity] = useState(false); // State to manage override quantity
+  const item_type = 'lunch'
 
   return (
     <div className="w-3/4 bg-secondary">
@@ -33,7 +37,7 @@ const LunchCard = ({ index, lunch }) => {
           <h3 className="text-white text-[20px] font-bold">{lunch.name}</h3>
           <h3 className="text-white text-[20px] font-bold">KSH {lunch.price}</h3> 
           <div>
-            <CartButton lunch={lunch} />
+            <CartButton lunch={lunch}  addToCart={addToCart} item_type={item_type} item_id={lunch.id} quantity={quantity} />
             <Link to={`/lunch/${lunch.id}`}>
               <BuyButton />
             </Link>
@@ -44,4 +48,4 @@ const LunchCard = ({ index, lunch }) => {
   );
 };
 
-export default connect(null, {})(LunchCard);
+export default connect(null, {addToCart})(LunchCard);

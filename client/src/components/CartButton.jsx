@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CartButton = ({ product, addToCart, quantity, overrideQuantity }) => {
+const CartButton = ({ addToCart, item_type, item_id, quantity }) => {
     const handleAddToCart = () => {
-        addToCart(product, quantity, overrideQuantity); // Pass quantity and overrideQuantity to addToCart
+        addToCart( item_type, item_id, quantity); // Pass 'item_type' to addToCart
     };
 
     return (
