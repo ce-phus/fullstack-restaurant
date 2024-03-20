@@ -19,6 +19,8 @@ import Login from "./Login"
 import Error from '../components/Error'
 import BreakfastDetailsPage from './BreakfastDetailsPage'
 import DinnerDetailsPage from './DinnerDetailsPage'
+import BreakfastCheckoutPage from './BreakfastCheckoutPage'
+import DinnerCheckoutPage from './DinnerCheckoutPage'
 
 export {
     AccountPage,
@@ -41,5 +43,7 @@ export {
     Login,
     Error, 
     BreakfastDetailsPage,
-    DinnerDetailsPage
+    DinnerDetailsPage, 
+    BreakfastCheckoutPage, 
+    DinnerCheckoutPage
 }

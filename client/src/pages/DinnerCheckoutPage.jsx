@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLunchDetails } from '../actions/lunchActions'
 import { ChargeMpesaComponent } from '../components';
 import { Link, useParams } from 'react-router-dom'
 import { UserAddressComponent } from '../components';
+import { getDinnerDetails } from '../actions/dinnerActions';
 
-const CheckoutPage = () => {
+const DinnerCheckoutPage = () => {
 
-  const router = useNavigate()
   const {id} = useParams()
 
   const dispatch = useDispatch()
@@ -18,27 +17,26 @@ const CheckoutPage = () => {
   const createMpesaReducer = useSelector(state => state.mpesaStkPushReducer);
   const { error: mpesaCreationError, success, loading: mpesaCreationLoading } = createMpesaReducer;
 
-  const handleAddressId = (id) => {
-      if (id) {
-        setAddressSelected(true);
-      }
-      setSelectedAddressId(id);
-  };
-
-  const lunchDetailsReducer = useSelector(state=> state.lunchDetailsReducer);
-  const { loading, error, lunch } = lunchDetailsReducer
+  const dinnerDetailsReducer = useSelector(state=> state.dinnerDetailsReducer);
+  const {loading, error, dinner } = dinnerDetailsReducer
 
   const baseUrl = 'http://localhost:8000';
-  const fullImageUrl = baseUrl + lunch.image;
+  const fullImageUrl = baseUrl + dinner.image;
+
+  const handleAddressId = (id) => {
+    if (id) {
+      setAddressSelected(true);
+    }
+    setSelectedAddressId(id);
+  }
 
   useEffect(() => {
     if (id) {
-        dispatch(getLunchDetails(id));
+        dispatch(getDinnerDetails(id));
     }
   }, [dispatch, id]);
-
-  return (
-    <div className="container mx-auto px-4 py-10 text-light mt-10">
+    return (
+      <div className="container mx-auto px-4 py-10 text-light mt-10">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
                 <div className="p-4 mb-8 rounded-lg bg-gray-800">
                     <h3 className="text-3xl md:text-6xl font-bold mb-6">Checkout Summary</h3>
@@ -49,15 +47,15 @@ const CheckoutPage = () => {
                     ) : (
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="mt-4 md:mt-0">
-                                <p className="font-semibold text-xl md:text-3xl text-gray-400">{lunch.name}</p>
+                                <p className="font-semibold text-xl md:text-3xl text-gray-400">{dinner.name}</p>
                                 <hr className="my-4 border-gray-700" />
-                                <p className="text-gray-500 text-lg">{lunch.description}</p>
+                                <p className="text-gray-500 text-lg">{dinner.description}</p>
                                 <p className="text-accent mt-6">
-                                    Price: <span className="text-light ml-2">Ksh {lunch.price}</span>
+                                    Price: <span className="text-light ml-2">Ksh {dinner.price}</span>
                                 </p>
                             </div>
                             <div className="relative">
-                                <img src={fullImageUrl} alt={lunch.name} width={550} height={500} className="rounded-lg" />
+                                <img src={fullImageUrl} alt={dinner.name} width={550} height={500} className="rounded-lg" />
                             </div>
                         </div>
                     )}
@@ -79,7 +77,7 @@ const CheckoutPage = () => {
                 </div>
             </div>
         </div>
-  )
-}
+    )
+  }
 
-export default CheckoutPage
+export default DinnerCheckoutPage

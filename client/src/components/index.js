@@ -17,6 +17,11 @@ import LunchCard from "./LunchCard"
 import MenuDinner from "./MenuDinner"
 import MenuLunch from "./MenuLunch"
 import DinnerCard from "./DinnerCard"
+import CreateAddressComponent from "./CreateAddressComponent"
+import { dateCheck } from "./GetDate"
+import SearchBarForOrder from "./SearchBarForOrder"
+import ChargeMpesaComponent from "./ChargeMpesaComponent"
+import UserAddressComponent from "./UserAddressComponent"
 
 export {
     Hero, 
@@ -37,5 +42,10 @@ export {
     LunchCard,
     MenuDinner, 
     MenuLunch,
-    DinnerCard
+    DinnerCard,
+    CreateAddressComponent,
+    dateCheck,
+    SearchBarForOrder,
+    ChargeMpesaComponent,
+    UserAddressComponent
 }

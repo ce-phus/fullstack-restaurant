@@ -9,11 +9,11 @@ const CartDropdown = () => {
   const cartReducer = useSelector(state => state.cart);
   const cartItems = cartReducer.cartItems || [];
 
-  console.log("Cart Items:", cartItems)
+  // console.log("Cart Items:", cartItems)
 
   // Calculate total price by summing up cart_total_price of each entry in cartItems
   const totalPrice = cartItems.reduce((acc, curr) => acc + curr.cart_total_price, 0);
-  console.log("Cart Total Price: ", totalPrice)
+  // console.log("Cart Total Price: ", totalPrice)
 
   const [isOpen, setIsOpen] = useState(false);
 

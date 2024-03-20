@@ -27,7 +27,7 @@ const LunchCard = ({ index, lunch, addToCart }) => {
         <Link to={`/lunch/${lunch.id}`}>
           <img
             src={fullImageUrl}
-            className="w-full h-auto rounded-t-lg w-[500px] h-[400px]" 
+            className="rounded-t-lg w-[500px] h-[500px]" 
             alt="Lunch" 
           />
         </Link>

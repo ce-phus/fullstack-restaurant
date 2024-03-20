@@ -236,8 +236,8 @@ const Navbar = () => {
                 </button>
                 {isUserMenuOpen && (
                     <ul className="absolute left-0 mt-2 py-2 w-48 bg-gray-500 rounded-lg shadow-lg">
-                    <li><Link to="/account-settings" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Account Settings</Link></li>
-                    <li><Link to="/address-settings" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Address Settings</Link></li>
+                    <li><Link to="/account" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Account Settings</Link></li>
+                    <li><Link to="/all-addresses" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Address Settings</Link></li>
                     <li><Link to="/all-orders" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>All Orders</Link></li>
                     <li><button onClick={logoutHandler} className='block px-4 py-2 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl ml-4 mt-5'>Sign Out</button></li>
                   </ul>

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLunchDetails } from '../actions/lunchActions'
+import { getBreakfastDetails } from '../actions/breakfastActions';
 import { ChargeMpesaComponent } from '../components';
 import { Link, useParams } from 'react-router-dom'
 import { UserAddressComponent } from '../components';
 
-const CheckoutPage = () => {
+const BreakfastCheckoutPage = () => {
 
   const router = useNavigate()
   const {id} = useParams()
@@ -18,25 +18,24 @@ const CheckoutPage = () => {
   const createMpesaReducer = useSelector(state => state.mpesaStkPushReducer);
   const { error: mpesaCreationError, success, loading: mpesaCreationLoading } = createMpesaReducer;
 
+  const breakfastDetailReducer = useSelector(state=> state.breakfastDetailReducer);
+  const { loading, error, breakfast } = breakfastDetailReducer
+
+  const baseUrl = 'http://localhost:8000';
+  const fullImageUrl = baseUrl + breakfast.image;
+
   const handleAddressId = (id) => {
       if (id) {
         setAddressSelected(true);
       }
       setSelectedAddressId(id);
-  };
-
-  const lunchDetailsReducer = useSelector(state=> state.lunchDetailsReducer);
-  const { loading, error, lunch } = lunchDetailsReducer
-
-  const baseUrl = 'http://localhost:8000';
-  const fullImageUrl = baseUrl + lunch.image;
+  }
 
   useEffect(() => {
     if (id) {
-        dispatch(getLunchDetails(id));
+        dispatch(getBreakfastDetails(id));
     }
   }, [dispatch, id]);
-
   return (
     <div className="container mx-auto px-4 py-10 text-light mt-10">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
@@ -49,15 +48,15 @@ const CheckoutPage = () => {
                     ) : (
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="mt-4 md:mt-0">
-                                <p className="font-semibold text-xl md:text-3xl text-gray-400">{lunch.name}</p>
+                                <p className="font-semibold text-xl md:text-3xl text-gray-400">{breakfast.name}</p>
                                 <hr className="my-4 border-gray-700" />
-                                <p className="text-gray-500 text-lg">{lunch.description}</p>
+                                <p className="text-gray-500 text-lg">{breakfast.description}</p>
                                 <p className="text-accent mt-6">
-                                    Price: <span className="text-light ml-2">Ksh {lunch.price}</span>
+                                    Price: <span className="text-light ml-2">Ksh {breakfast.price}</span>
                                 </p>
                             </div>
                             <div className="relative">
-                                <img src={fullImageUrl} alt={lunch.name} width={550} height={500} className="rounded-lg" />
+                                <img src={fullImageUrl} alt={breakfast.name} width={550} height={500} className="rounded-lg" />
                             </div>
                         </div>
                     )}
@@ -82,4 +81,4 @@ const CheckoutPage = () => {
   )
 }
 
-export default CheckoutPage
+export default BreakfastCheckoutPage

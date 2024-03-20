@@ -172,9 +172,13 @@ import {
   }
   
   // user details
-  export const userDetails = (id) => async (dispatch, getState) => {
-  
+  // user details
+export const userDetails = (id) => async (dispatch, getState) => {
+
     try {
+  
+        // Extract the userId from the id object
+        const { userId } = id.userId;
   
         dispatch({
             type: USER_DETAILS_REQUEST
@@ -191,8 +195,8 @@ import {
             }
         }
   
-        // call api
-        const { data } = await axios.get(`http://127.0.0.1:8000/account/user/${id}`, config)
+        // Construct the URL using userId
+        const { data } = await axios.get(`http://127.0.0.1:8000/account/user/${userId}/`, config)
   
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -206,6 +210,7 @@ import {
         })
     }
   }
+  
   
   // user update details
   export const userUpdateDetails = (userData) => async (dispatch, getState) => {

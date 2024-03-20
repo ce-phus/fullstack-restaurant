@@ -9,6 +9,7 @@ from menu.models import Breakfast, Lunch, Dinner
 from menu.serializers import BreakfastSerializer, LunchSerializer, DinnerSerializer
 from account.serializers import MpesaCheckoutSerializer
 from .mpesagateway import MpesaGateway
+from rest_framework import permissions
 
 logger = logging.getLogger(__name__)
 
@@ -55,3 +56,11 @@ class MpesaCallBack(APIView):
         logging.info("{}".format("Callback from MPESA"))
         data = request.body
         return gateway.callback(json.loads(data))
+
+# check token expired or not
+class CheckTokenValidation(APIView):
+
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return Response("Token is Valid", status=status.HTTP_200_OK)

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navbar } from './components';
-import { AccountPage, AccountUpdate, AddressUpdatePage, AllAddressesOfUserPage, CartPage, DeleteUserAccountPage, Home, Login, CheckoutPage, MenuListPage, MenuCreatePage, MenuDetailsPage, MenuUpdatePage, NotFoundPage, OrderListPage, PaymentStatus, RegisterPage, BreakfastDetailsPage, DinnerDetailsPage } from './pages';
+import { AccountPage, AccountUpdate, AddressUpdatePage, AllAddressesOfUserPage, CartPage, DeleteUserAccountPage, Home, Login, CheckoutPage, MenuListPage, MenuCreatePage, MenuDetailsPage, MenuUpdatePage, NotFoundPage, OrderListPage, PaymentStatus, RegisterPage, BreakfastDetailsPage, DinnerDetailsPage, BreakfastCheckoutPage, DinnerCheckoutPage} from './pages';
 
 const App = () => {
   return (
@@ -20,7 +20,11 @@ const App = () => {
             <Route path='/dinner/:id/' element={ <DinnerDetailsPage/> } exact/>
 
             <Route path='/menu-update/:id/' element={<MenuUpdatePage/>} exact/>
+
             <Route path='/lunch/:id/checkout' element={<CheckoutPage/>} exact/>
+            <Route path='/breakfast/:id/breakfastcheckout' element={<BreakfastCheckoutPage/>} exact/>
+            <Route path='/dinner/:id/dinnercheckout' element={<DinnerCheckoutPage/>} exact/>
+
             <Route path='/payment-status' element={<PaymentStatus/>} exact/>
             <Route path='/login' element={<Login/>} exact/>
             <Route path='/register' element={<RegisterPage/>} exact/>

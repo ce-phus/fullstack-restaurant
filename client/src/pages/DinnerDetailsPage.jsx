@@ -84,7 +84,7 @@ const DinnerDetailsPage = () => {
                         <h2 className='text-3xl text-gray-400 font-semibold'>Buy</h2>
                         <hr className='my-8 bg-gray-700 rounded'></hr>
                         {dinner.stock ?
-                            <Link href={`/checkout/${dinner.id}`}>
+                            <Link to={`/dinner/${dinner.id}/dinnercheckout/`}>
                                 <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded '>Pay with Mpesa</button>
                             </Link>
                             :

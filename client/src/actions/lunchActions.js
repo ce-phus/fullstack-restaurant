@@ -65,7 +65,6 @@ export const getLunchDetails = (id) => async (dispatch) => {
 
         // call api
         const { data } = await axios.get(`http://127.0.0.1:8000/menu/lunch/${id}/`)
-        console.log("Lunch ID:");
 
 
         dispatch({
