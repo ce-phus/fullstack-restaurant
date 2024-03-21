@@ -176,6 +176,7 @@ class CreateUserAddressView(APIView):
             "username": request.data["username"],
             "first_name": request.data["first_name"],
             "last_name": request.data["last_name"],
+            "email" : request.data.get('email', ''),  # If email is not present, default to empty string
             "user": request.user.id,
             "phone_number": request.data["phone_number"],
             "pin_code": request.data["pin_code"],

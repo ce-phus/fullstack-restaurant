@@ -13,7 +13,6 @@ import MenuDetailsPage from "./LunchDetailsPage"
 import MenuUpdatePage from "./MenuUpdatePage"
 import NotFoundPage from "./NotFoundPage"
 import OrderListPage from "./OrderListPage"
-import PaymentStatus from "./PaymentStatus"
 import RegisterPage from "./RegisterPage"
 import Login from "./Login"
 import Error from '../components/Error'
@@ -38,7 +37,6 @@ export {
     MenuUpdatePage,
     NotFoundPage,
     OrderListPage,
-    PaymentStatus,
     RegisterPage,
     Login,
     Error, 

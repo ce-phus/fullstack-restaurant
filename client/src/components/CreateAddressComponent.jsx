@@ -10,9 +10,10 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
 
     const dispatch = useDispatch()
 
-    const [name, setName] = useState("")
+    const [username, setName] = useState("")
     const [first_name, setFirstname] = useState("")
     const [last_name, setLastname] = useState("")
+    const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [pinCode, setPinCode] = useState("")
     const [houseNumber, setHouseNumber] = useState("")
@@ -27,9 +28,10 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
     const addressSubmitHandler = (e) => {
         e.preventDefault()
         const addressData = {
-            "name": name,
+            "username": username,
             "first_name": first_name,
             "last_name": last_name,
+            "email": email,
             "phone_number": phoneNumber,
             "pin_code": pinCode,
             "house_no": houseNumber,
@@ -60,7 +62,7 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
                     <div className='flex flex-wrap -mx-3 mb-6'>
                         <div className='w-full md:w-1/2 px-3 pl-10 mb-6 md:mb-0'>
                             <label className='block uppercase tracking-wide text-light-700 text-xs font-bold' for="gird-username">Username</label>
-                            <input className='appearance-none block w-full bg-gray-400 text-gray-700 border border-red-500 rounded py-3 px-4 pl-10 mb-3 mt-3 leading-tight focus:outline-none focus:bg-white' id='grid-first-name' type='text' placeholder='Jane' value={name}
+                            <input className='appearance-none block w-full bg-gray-400 text-gray-700 border border-red-500 rounded py-3 px-4 pl-10 mb-3 mt-3 leading-tight focus:outline-none focus:bg-white' id='grid-first-name' type='text' placeholder='Jane' value={username}
                             onChange={(e)=> setName(e.target.value)}></input>
                             <p className='text-red-500 text-xs italic'>Please fill out this field.</p>
                         </div>
@@ -77,6 +79,18 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
                                 Last Name
                             </label>
                             <input className='appearance-none block w-full bg-gray-400 mt-3 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' type='text' placeholder='Last Name' value={last_name} onChange={(e) => setLastname(e.target.value)}></input>
+                        </div>
+                        <div class="w-full  px-3 mb-6 md:mb-0 pl-10">
+                        <label className='block uppercase tracking-wide text-light-700 text-xs font-bold mb-2' for='grid-phone-number'>
+                                Email
+                            </label>
+                            <input className='appearance-none block w-full bg-gray-400 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' type='text' placeholder='email' value={email}  onChange={(e) => setEmail(e.target.value)}></input>
+                        </div>
+                        <div class="w-full  px-3 mb-6 md:mb-0 pl-10">
+                        <label className='block uppercase tracking-wide text-light-700 text-xs font-bold mb-2' for='grid-phone-number'>
+                                PhoneNumber
+                            </label>
+                            <input className='appearance-none block w-full bg-gray-400 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' type='text' placeholder='+254' value={phoneNumber}  onChange={(e) => setPhoneNumber(e.target.value)}></input>
                         </div>
                         <div class="w-full  px-3 mb-6 md:mb-0 pl-10">
                         <label className='block uppercase tracking-wide text-light-700 text-xs font-bold mb-2' for='grid-pin-code'>
@@ -112,21 +126,13 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
                             <label class="block uppercase tracking-wide text-light-700 text-xs font-bold mb-2" for="grid-state">
                                 City
                             </label>
-                            <div class="relative">
-                                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" type='text' value={city} onChange={(e) => setCity(e.target.value)}>
-                                    <option>Nairobi</option>
-                                    <option>Bungoma</option>
-                                    <option>Nyeri</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
-                            </div>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="Nairobi" value={city}
+                            onChange={(e) => setCity(e.target.value)}/>
                         </div>
                     </div>
                     <button 
                     className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold py-2 px-4 rounded-lg mt-3' type='submit'>Save Address</button>
-                    <button className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold rounded-lg py-2 px-4 ml-20' style={{width: '20%'}}>Cancel</button>
+                    <button className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold rounded-lg py-2 px-4 ml-20' >Cancel</button>
                 </form>
             </div>
         </div>

@@ -24,6 +24,7 @@ const AccountPage = () => {
   // user Details reducer
   const userDetailsReducer = useSelector(state => state.userDetailsReducer)
   const { user:userAccDetails, loading } = userDetailsReducer
+  console.log("User Account: ", userAccDetails)
 
   useEffect(() => {
     if (!userInfo) {
@@ -37,6 +38,7 @@ const AccountPage = () => {
       }
     }
   }, [router, userInfo, dispatch])
+  
 
   // logout
   const logoutHandler= () => {
@@ -58,17 +60,17 @@ const AccountPage = () => {
                   <div className=''>
                   {loading && <span style = {{ display: "flex" }}><h5>Getting User Information</h5><span className = "ml-2"><Spinner/></span></span>}
                   <div className='container mx-auto items-center grid justify-items-center border border-2 rounded-md bg-gray-700 w-1/2'>
-                      <div className='grid grid-rows-1 grid-cols-2 gap-4 pt-4'>
+                      <div className='flex '>
                           <div className='text-light p-3 text-semibold'>Name:</div>
-                          <div className='p-3 text-light'>{userAccDetails.username}</div>
+                          <div className='p-3 text-accent'>{userInfo.username}</div>
                       </div>
-                      <div className='grid grid-rows-1 grid-cols-2 gap-4'>
+                      <div className='flex flex-row '>
                           <div className='text-light p-3 text-semibold'>Email:</div>
-                          <div className='p-3 text-light'>{userAccDetails.email}</div>
+                          <div className='p-3 text-accent'>{userInfo.email}</div>
                       </div>
-                      <div className='grid grid-rows-1 grid-cols-2 gap-4 mb-3'>
+                      <div className='flex mb-3'>
                           <div className='text-light p-3 text-semibold'>Admin Priviledges:</div>
-                          <div className='p-3 text-light'>{userAccDetails.admin ? "Yes" : "No"}</div>
+                          <div className='p-3 text-accent'>{userAccDetails.admin ? "Yes" : "No"}</div>
                       </div>
                       <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Link to={`/account/update/`} className='text-accent pb-5'>Update Account details</Link>

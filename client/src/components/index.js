@@ -22,6 +22,7 @@ import { dateCheck } from "./GetDate"
 import SearchBarForOrder from "./SearchBarForOrder"
 import ChargeMpesaComponent from "./ChargeMpesaComponent"
 import UserAddressComponent from "./UserAddressComponent"
+import PaymentStatus from "./PaymentStatus"
 
 export {
     Hero, 
@@ -47,5 +48,6 @@ export {
     dateCheck,
     SearchBarForOrder,
     ChargeMpesaComponent,
-    UserAddressComponent
+    UserAddressComponent,
+    PaymentStatus
 }

@@ -37,7 +37,7 @@ class BillingAddress(models.Model):
     landmark = models.CharField(max_length=120, null=False, blank=False)
     city = models.CharField(max_length=120, null=False, blank=False)
     state = models.CharField(max_length=120, null=False, blank=False)
-    new_field = models.CharField(max_length=140, default='SOME STRING')
+    new_field = models.CharField(max_length=140, default='SOME STRING', null=True, blank=True)
 
 
     def __str__(self):

@@ -8,7 +8,7 @@ import {
 } from '../constants/index';
 import axios from 'axios';
 
-export const mpesastkpush = (payload, id) => async (dispatch, getState) => {
+export const mpesastkpush = (payload, item_type, id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: MPESA_STK_PUSH_REQUEST,
@@ -25,10 +25,8 @@ export const mpesastkpush = (payload, id) => async (dispatch, getState) => {
             },
         };
 
-        console.log('Payload sent to STK push:', payload); // Log the payload before sending the request
+        const { data } = await axios.post(`http://127.0.0.1:8000/payments/checkout/${item_type}/${id}/`, payload, config);
 
-        // Update the URL to include the product ID
-        const { data } = await axios.post(`http://127.0.0.1:8000/payments/checkout/${id}/`, payload, config);
 
         dispatch({
             type: MPESA_STK_PUSH_SUCCESS,

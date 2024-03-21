@@ -75,6 +75,9 @@ const CheckoutPage = () => {
                         selectedAddressId={selectedAddressId}
                         addressSelected={addressSelected}
                         id={id}
+                        itemPrice={lunch.price}
+                        itemlist={lunch}
+                        item_type="lunch"
                     />
                 </div>
             </div>

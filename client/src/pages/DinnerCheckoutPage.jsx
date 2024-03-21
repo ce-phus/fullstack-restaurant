@@ -73,6 +73,8 @@ const DinnerCheckoutPage = () => {
                         selectedAddressId={selectedAddressId}
                         addressSelected={addressSelected}
                         id={id}
+                        itemPrice={dinner.price}
+                        item={dinner}
                     />
                 </div>
             </div>
