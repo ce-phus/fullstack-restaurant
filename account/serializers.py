@@ -10,10 +10,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=User
-        fields=["id", "username","first_name", "last_name", "email", "admin"]
+        fields=["id", "username","first_name", "last_name", "email", "admin",]
 
-        def get_admin(self, obj):
-            return obj.is_staff
+    def get_admin(self, obj):
+        return obj.is_staff
 
 # creating tokens manually *with user regsitration we will also create tokens
 class UserRegisterTokenSerializer(UserSerializer):
@@ -30,6 +30,9 @@ class UserRegisterTokenSerializer(UserSerializer):
 # List of transactions
     
 class MpesaCheckoutSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
+
     class Meta:
         model = TransactionModel
         fields = (
@@ -37,6 +40,8 @@ class MpesaCheckoutSerializer(serializers.ModelSerializer):
             "amount",
             "reference",
             "description",
+            "first_name",
+            "last_name",
         )
     def validate_phone_number(self, phone_number):
         """A very basic validation to remove the preciding + or replace the 0 with 254
@@ -75,6 +80,17 @@ class MpesaCheckoutSerializer(serializers.ModelSerializer):
         if description:
             return description
         return "Test"
+    
+    def validate(self, data):
+        """
+        Validate the serializer data, including first_name and last_name.
+        """
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+
+        # Perform additional validation for first_name and last_name if needed
+
+        return data
 
 class TransactionListSerializer(serializers.ModelSerializer):
 

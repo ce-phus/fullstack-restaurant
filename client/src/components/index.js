@@ -23,6 +23,9 @@ import SearchBarForOrder from "./SearchBarForOrder"
 import ChargeMpesaComponent from "./ChargeMpesaComponent"
 import UserAddressComponent from "./UserAddressComponent"
 import PaymentStatus from "./PaymentStatus"
+import BreakfastUpdate from "./BreakfastUpdate"
+import DInnerUpdate from "./DInnerUpdate"
+import LunchUpdate from "./LunchUpdate"
 
 export {
     Hero, 
@@ -49,5 +52,8 @@ export {
     SearchBarForOrder,
     ChargeMpesaComponent,
     UserAddressComponent,
-    PaymentStatus
+    PaymentStatus,
+    BreakfastUpdate,
+    DInnerUpdate,
+    LunchUpdate
 }

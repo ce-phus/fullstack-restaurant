@@ -29,6 +29,8 @@ const BreakfastDetailsPage = () => {
     const userLoginReducer =useSelector(state =>state.userLoginReducer);
     const{ userInfo } = userLoginReducer
 
+    // console.log("User Info: ", userInfo.is_staff)
+
     const deleteBreakfastReducer = useSelector(state => state.deleteBreakfastReducer);
     const { sucsess: breakfastDeletionSuccess } = deleteBreakfastReducer
 
@@ -67,12 +69,6 @@ const BreakfastDetailsPage = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div className='max-w-md bg-gray-800 border border-gray-700 rounded-lg shadow'>
                         <img className='rounded-t-lg w-full' src={fullImageUrl} alt={breakfast.name} />
-                        {userInfo && userInfo.admin &&
-                            <div className='flex justify-between p-4'>
-                                <button className='bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded' onClick={handleShow}>Delete Product</button>
-                                <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded' onClick={() => router(`/product-update/${breakfast.id}/`)}>Edit Product</button>
-                            </div>
-                        }
                     </div>
                     <div>
                         <p className='font-semibold text-3xl text-gray-400'>{breakfast.name}</p>
@@ -82,6 +78,12 @@ const BreakfastDetailsPage = () => {
                     </div>
                     <div className='mb-5'>
                         <h2 className='text-3xl text-gray-400 font-semibold'>Buy</h2>
+                        {userInfo && userInfo.is_staff &&
+                            <div className='flex justify-between p-4'>
+                                <button className='bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded' onClick={handleShow}>Delete Product</button>
+                                <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded' onClick={() => router(`/product-update/${breakfast.id}/`)}>Edit Product</button>
+                            </div>
+                        }
                         <hr className='my-8 bg-gray-700 rounded'></hr>
                         {breakfast.stock ?
                             <Link to={`/breakfast/${breakfast.id}/breakfastcheckout/`}>

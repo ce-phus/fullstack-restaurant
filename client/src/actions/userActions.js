@@ -171,45 +171,53 @@ import {
     }
   }
   
-  // user details
-  // user details
-export const userDetails = (id) => async (dispatch, getState) => {
-
+  
+  export const userDetails = (id) => async (dispatch, getState) => {
     try {
+      // Check if id and id.userId are defined
+      if (!id || !id.userId) {
+        throw new Error('Invalid user ID');
+      }
   
-        // Extract the userId from the id object
-        const { userId } = id.userId;
+      // Extract the userId from the id object
+      const { userId } = id;
+    //   console.log(`Requesting details for user ID: ${userId}`);
+
   
-        dispatch({
-            type: USER_DETAILS_REQUEST
-        })
+      dispatch({
+        type: USER_DETAILS_REQUEST
+      });
   
-        const {
-            userLoginReducer: { userInfo }
-        } = getState()
+      const {
+        userLoginReducer: { userInfo }
+      } = getState();
   
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`
-            }
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`
         }
+      };
+    //   console.log(`Using token: ${userInfo.token}`);
+
+      // Construct the URL using userId
+      const { data } = await axios.get(`http://127.0.0.1:8000/account/user/${userId}/`, config);
   
-        // Construct the URL using userId
-        const { data } = await axios.get(`http://127.0.0.1:8000/account/user/${userId}/`, config)
-  
-        dispatch({
-            type: USER_DETAILS_SUCCESS,
-            payload: data
-        })
+      dispatch({
+        type: USER_DETAILS_SUCCESS,
+        payload: data
+      });
   
     } catch (error) {
-        dispatch({
-            type: USER_DETAILS_FAIL,
-            payload: error.response && error.response.data.details ? error.response.data.details : error.message
-        })
+    // console.error('Error fetching user details:', error.response ? error.response.data : error.message);
+
+      dispatch({
+        type: USER_DETAILS_FAIL,
+        payload: error.response && error.response.data.details ? error.response.data.details : error.message
+      });
     }
-  }
+  };
+  
   
   
   // user update details

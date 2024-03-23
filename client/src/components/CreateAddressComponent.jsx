@@ -70,7 +70,7 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
                             <label className='block uppercase tracking-wide text-light-700 text-xs font-bold mb-2' for='first-name'>
                                 First Name
                             </label>
-                            <input className='appearance-none block w-full px-4 py-3 bg-gray-400 text-gray-700 border mt-3 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='grid-first-name' type='text' placeholder='First name' onChange={(e) => setFirstname(e.target.value)}></input>
+                            <input className='appearance-none block w-full px-4 py-3 bg-gray-400 text-gray-700 border mt-3 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' id='grid-first-name' type='text' placeholder='First name' onChange={(e) => setFirstname(e.target.value)} value={first_name}></input>
                         </div>
                     </div>
                     <div className='flex flex-wrap -mx-3 mb-6'>
@@ -132,7 +132,7 @@ const CreateAddressComponent = ({ toggleCreateAddress }) => {
                     </div>
                     <button 
                     className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold py-2 px-4 rounded-lg mt-3' type='submit'>Save Address</button>
-                    <button className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold rounded-lg py-2 px-4 ml-20' >Cancel</button>
+                    <button className='bg-sky-500/50 hover:bg-blue-700 text-light font-bold rounded-lg py-2 px-4 ml-20' onClick={() => router("/all-addresses/")}>Cancel</button>
                 </form>
             </div>
         </div>

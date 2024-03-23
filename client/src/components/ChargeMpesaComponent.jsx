@@ -22,6 +22,9 @@ const ChargeMpesaComponent = ({ id, itemlist, match, selectedAddressId, item_typ
   const { address } = getSingleAddressReducer
   console.log("Address: ", address)
 
+  const csrfTokenElement = document.querySelector('input[name="csrfmiddlewaretoken"]');
+  const csrfToken = csrfTokenElement ? csrfTokenElement.value : '';
+
   useEffect(() => {
     // Fetch the address details when the selected address ID changes
     if (selectedAddressId) {
@@ -41,11 +44,14 @@ const ChargeMpesaComponent = ({ id, itemlist, match, selectedAddressId, item_typ
     const address_detail = `${address.house_no}, near ${address.landmark}, ${address.city}, 
     ${address.state}, ${address.pin_code}`
     const payload = {
-        phone_number: phoneNumber,
-        amount: amount,
-        reference: "Grill Restaurant",
-        description: "Grill Restaurant",
-        item_type: item_type,
+      csrfmiddlewaretoken: csrfToken,
+      first_name: "Peter",
+      last_name: "Nakitare",
+      phone_number: phoneNumber,
+      amount: amount,
+      reference: "Grill Restaurant",
+      description: "Grill Restaurant",
+      item_type: item_type,
     };
 
     dispatch(mpesastkpush(payload, id, item_type));

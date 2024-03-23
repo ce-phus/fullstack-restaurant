@@ -20,6 +20,7 @@ class MpesaGateway:
     consumer_secret = None
     access_token_url = None
     access_token_expiration = None
+    access_token = None
     timestamp = None
 
     def __init__(self) -> None:
@@ -71,9 +72,15 @@ class MpesaGateway:
         logging.info("Received payload: {}".format(payload))
 
         api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-        data = payload["data"]
-        amount = data["amount"]
-        phone_number = data["phone_number"]
+        # Instead of accessing payload["data"], access payload directly
+        data = payload
+
+        # Then, retrieve individual values from the payload as needed
+        phone_number = data.get("phone_number")
+        amount = data.get("amount")
+        reference = data.get("reference")
+        description = data.get("description")
+
         passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
         password = self.generate_password(self.shortcode, passkey, self.timestamp)
         req_data = {

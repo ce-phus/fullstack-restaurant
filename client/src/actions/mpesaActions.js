@@ -25,7 +25,9 @@ export const mpesastkpush = (payload, item_type, id) => async (dispatch, getStat
             },
         };
 
+        console.log(`item_type: ${item_type}, id: ${id}`);
         const { data } = await axios.post(`http://127.0.0.1:8000/payments/checkout/${item_type}/${id}/`, payload, config);
+
 
 
         dispatch({

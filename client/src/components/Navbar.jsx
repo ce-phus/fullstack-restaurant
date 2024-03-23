@@ -4,17 +4,20 @@ import { logout } from '../actions/userActions'
 import { styles } from '../styles';
 import { Link } from 'react-router-dom';
 import logo from "/logo.svg"
-import { addToCart } from "../actions/cartActions"
+import { userDetails } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom'
 import CartDropdown from './CartDropdown';
 
 const Navbar = () => {
-
   let router = useNavigate()
   const dispatch = useDispatch()
 
   // Menu dropdown
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const userDetailsReducer = useSelector(state=> state.userDetailsReducer)
+  const { user:userAccDetails, loading} = userDetailsReducer || {}
+//   console.log("User acc: ", userAccDetails)
 
   const handleUserMenuToggle = () => {
     setIsUserMenuOpen(!isUserMenuOpen)
@@ -30,6 +33,7 @@ const Navbar = () => {
   // login reducer
   const userLoginReducer = useSelector(state => state.userLoginReducer)
   const { userInfo } = userLoginReducer
+//   console.log("UserInfo: ", userInfo)
 
   // logout
   const logoutHandler = () => {
@@ -129,7 +133,7 @@ const Navbar = () => {
 				</svg>
 			</button>
 		</div>
-
+        
         <ul className='hidden absolute left-[50%] transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6'>
         <li><a className="text-sm text-gray-400 hover:text-gray-500" href="/">Home</a></li>
 			<li className="text-gray-300">
@@ -156,7 +160,16 @@ const Navbar = () => {
 				</svg>
 			</li>
 			<li><a className="text-sm text-gray-400 hover:text-gray-500" href="/contact">Contact</a></li>
+             {/* New menu admins only */}
+             {userInfo && userInfo.admin !== true ? (
+                <li>
+                    <button onClick={() => router("/menu-update/")} className='bg-blue-500 rounded-lg px-2 py-1.5'>
+                    Add Menu
+                    </button>
+                </li>
+                ) : ""}
 		</ul>
+        
 		<div className="hidden lg:flex items-center">
           {userInfo ? (
             <div className="relative">
@@ -225,37 +238,35 @@ const Navbar = () => {
 				</ul>
 			</div>
 			<div className="flex items-center lg:hidden">
-    <div className="relative mx-3">
-        {/* User SVG Dropdown */}
-        {userInfo ? (
-            <div className="relative">
-                <button onClick={handleUserMenuToggle}>
-                    <svg className="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-gray-light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                        <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                    </svg>
-                </button>
-                {isUserMenuOpen && (
-                    <ul className="absolute left-0 mt-2 py-2 w-48 bg-gray-500 rounded-lg shadow-lg">
-                    <li><Link to="/account" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Account Settings</Link></li>
-                    <li><Link to="/all-addresses" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Address Settings</Link></li>
-                    <li><Link to="/all-orders" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>All Orders</Link></li>
-                    <li><button onClick={logoutHandler} className='block px-4 py-2 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl ml-4 mt-5'>Sign Out</button></li>
-                  </ul>
-                )}
+                <div className="relative mx-3">
+                    {/* User SVG Dropdown */}
+                    {userInfo ? (
+                        <div className="relative">
+                            <button onClick={handleUserMenuToggle}>
+                                <svg className="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-gray-light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
+                                </svg>
+                            </button>
+                            {isUserMenuOpen && (
+                                <ul className="absolute left-0 mt-2 py-2 w-48 bg-gray-500 rounded-lg shadow-lg">
+                                <li><Link to="/account" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Account Settings</Link></li>
+                                <li><Link to="/all-addresses" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>Address Settings</Link></li>
+                                <li><Link to="/all-orders" className='ml-4 hover:text-accent tracking-wide text-lg font-semibold'>All Orders</Link></li>
+                                <li><button onClick={logoutHandler} className='block px-4 py-2 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl ml-4 mt-5'>Sign Out</button></li>
+                            </ul>
+                            )}
+                        </div>
+                    ) : (
+                    <>
+                        {/* Render login/signup buttons if user is not logged in */}
+                        
+                            <a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl text-secondary hover:bg-secondary hover:text-white  border hover:border-accent" href="#">Sign in</a>
+                            <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
+                            </> 
+                    )}
+                </div>
             </div>
-        ) : (
-          <>
-            {/* Render login/signup buttons if user is not logged in */}
-            
-                <a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl text-secondary hover:bg-secondary hover:text-white  border hover:border-accent" href="#">Sign in</a>
-                <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
-                </> 
-        )}
-    </div>
-
-    
-</div>
-    <p className="my-4 text-xs text-center text-gray-400">
+                <p className="my-4 text-xs text-center text-gray-400">
 					<span>Copyright © 2024</span></p>
         </nav>
     </div>

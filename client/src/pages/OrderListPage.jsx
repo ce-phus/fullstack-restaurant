@@ -67,7 +67,7 @@ const OrderListPage = () => {
   const handleSearchTerm = (term) => {
     setCloneSearchTerm(term);
   };
-
+  
   return (
     <SectionWrapper>
       <div className="">
@@ -88,9 +88,11 @@ const OrderListPage = () => {
                                 Order Id
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Customer Name
+                                Customer First Name
                             </th>
-                            
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Customer Second Name
+                            </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                Ordered Items
                             </th>
@@ -113,30 +115,31 @@ const OrderListPage = () => {
                         </tr>
                     </thead>
                     {orders.filter((item) => (
-                        item.name.toLowerCase().includes(cloneSearchTerm) ||
-                        item.ordered_item.toLowerCase().includes(cloneSearchTerm) ||
-                        item.address.toLowerCase().includes(cloneSearchTerm)
+                        item.first_name.toLowerCase().includes(cloneSearchTerm) ||
+                        item.last_name.toLowerCase().includes(cloneSearchTerm) ||
+                        item.ordered_item.toLowerCase().includes(cloneSearchTerm)
                     )).map((order, idx) => (
                         <tbody key={idx} className="bg-white divide-y divide-gray-200">
                             <tr>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.ordered_item}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.paid_status ? (
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.id}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.first_name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.last_name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.ordered_item}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.paid_status ? (
                                 <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600  border-gray-700 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 " />
                             ) : (
                                 <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2" />
                             )}</td>
 
-                                <td className="px-6 py-4 whitespace-nowrap">{order.paid_at}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.total_price}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.is_delivered ? (
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.paid_at}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.total_price}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.is_delivered ? (
                                 <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600  border-gray-700 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 " />
                             ) : (
                                 <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2" />
                             )}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{order.delivered_at}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">{order.delivered_at}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-gray-900">
                                 {order.is_delivered ?
                                             <button
                                                 className="bg-red-600 hover:bg-red-700 focus:ring-blue-800 rounded-lg font-medium text-sm px-5 py-2.5 text-center"
@@ -146,7 +149,7 @@ const OrderListPage = () => {
                                                     &&
                                                     idOfchangeDeliveryStatus === order.id
                                                     ?
-                                                    <Spinner animation="border" />
+                                                    <Spinner/>
                                                     :
                                                     "Mark as Undelivered"}
                                             </button>

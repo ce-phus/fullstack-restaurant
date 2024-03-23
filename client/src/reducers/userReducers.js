@@ -70,7 +70,10 @@ export const userLoginReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                userInfo: action.payload
+                userInfo: {
+                    ...action.payload,
+                    is_staff: action.payload.is_staff // Assuming the backend sends is_staff attribute
+                }
             }
         case USER_LOGIN_FAIL:
             return {

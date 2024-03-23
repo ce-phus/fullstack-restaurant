@@ -160,13 +160,13 @@ export const updatebreakfast = (id, breakfast) => async (dispatch, getState) => 
 
         const config = {
             headers: {
-                "Content-Type": "multipart/form-dat",
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
 
-        const { data } = await axios.post(
-            `http://127.0.0.1:8000/menu/breakfast-update/${id}`,
+        const { data } = await axios.put(
+            `http://127.0.0.1:8000/menu/breakfast-update/${id}/`,
             breakfast,
             config
         )

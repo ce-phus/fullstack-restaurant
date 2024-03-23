@@ -98,12 +98,18 @@ class UserAccountDetailsView(APIView):
     permission_classes= [permissions.IsAuthenticated]
 
     def get(self, request, pk):
+        print(f"Received request for user ID: {pk}")
         try:
-            user= User.objects.get(id=pk)
+            user = User.objects.get(pk=pk)
             serializer = UserSerializer(user, many=False)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except:
+        except User.DoesNotExist:
+            print(f"User with ID {pk} not found.")
             return Response({"details": "User not Found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            print(f"An unexpected error occurred: {str(e)}")
+            return Response({"details": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         
 # Update user account
 class UserAccountUpdateView(APIView):

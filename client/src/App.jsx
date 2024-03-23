@@ -19,7 +19,7 @@ const App = () => {
             <Route path='/breakfast/:id/' element={ <BreakfastDetailsPage/> } exact/>
             <Route path='/dinner/:id/' element={ <DinnerDetailsPage/> } exact/>
 
-            <Route path='/menu-update/:id/' element={<MenuUpdatePage/>} exact/>
+            <Route path='/menu-update/' element={<MenuUpdatePage/>} exact/>
 
             <Route path='/lunch/:id/checkout' element={<CheckoutPage/>} exact/>
             <Route path='/breakfast/:id/breakfastcheckout' element={<BreakfastCheckoutPage/>} exact/>

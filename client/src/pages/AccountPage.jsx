@@ -23,21 +23,24 @@ const AccountPage = () => {
 
   // user Details reducer
   const userDetailsReducer = useSelector(state => state.userDetailsReducer)
-  const { user:userAccDetails, loading } = userDetailsReducer
-  console.log("User Account: ", userAccDetails)
+  const { user:userAccDetails, loading } = userDetailsReducer || {}
+  // console.log("User Account: ", userAccDetails)
 
   useEffect(() => {
     if (!userInfo) {
-      router("/login")
-    }else{
-      try{
-        dispatch(checkTokenValidation())
-        dispatch(userDetails(userInfo))
+      router("/login");
+    } else {
+      try {
+        dispatch(checkTokenValidation());
+        // Extract userId from userInfo
+        const userId = userInfo.id; // Adjust this according to your userInfo structure
+        dispatch(userDetails({ userId }));
       } catch (error) {
-        router('/')
+        router("/");
       }
     }
-  }, [router, userInfo, dispatch])
+  }, [router, userInfo, dispatch]);
+  
   
 
   // logout
@@ -62,11 +65,11 @@ const AccountPage = () => {
                   <div className='container mx-auto items-center grid justify-items-center border border-2 rounded-md bg-gray-700 w-1/2'>
                       <div className='flex '>
                           <div className='text-light p-3 text-semibold'>Name:</div>
-                          <div className='p-3 text-accent'>{userInfo.username}</div>
+                          <div className='p-3 text-accent'>{userAccDetails.username}</div>
                       </div>
                       <div className='flex flex-row '>
                           <div className='text-light p-3 text-semibold'>Email:</div>
-                          <div className='p-3 text-accent'>{userInfo.email}</div>
+                          <div className='p-3 text-accent'>{userAccDetails.email}</div>
                       </div>
                       <div className='flex mb-3'>
                           <div className='text-light p-3 text-semibold'>Admin Priviledges:</div>
