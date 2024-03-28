@@ -33,7 +33,7 @@ const Navbar = () => {
   // login reducer
   const userLoginReducer = useSelector(state => state.userLoginReducer)
   const { userInfo } = userLoginReducer
-//   console.log("UserInfo: ", userInfo)
+  console.log("UserInfo: ", userInfo)
 
   // logout
   const logoutHandler = () => {
@@ -161,13 +161,13 @@ const Navbar = () => {
 			</li>
 			<li><a className="text-sm text-gray-400 hover:text-gray-500" href="/contact">Contact</a></li>
              {/* New menu admins only */}
-             {userInfo && userInfo.admin !== true ? (
+             {userInfo && userInfo.admin ? 
                 <li>
                     <button onClick={() => router("/menu-update/")} className='bg-blue-500 rounded-lg px-2 py-1.5'>
                     Add Menu
                     </button>
                 </li>
-                ) : ""}
+                 : null}
 		</ul>
         
 		<div className="hidden lg:flex items-center">

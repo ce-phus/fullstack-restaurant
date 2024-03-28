@@ -7,10 +7,11 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const cartReducer = useSelector(state => state.cart);
   const { cartItems } = cartReducer;
-  console.log("Cart Items: ", cartItems)
+  // console.log("Cart Items: ", cartItems)
 
   // Calculate total price by summing up total_price of each entry in cartItems
   const totalPrice = cartItems.reduce((acc, curr) => acc + curr.cart_total_price, 0);
+  console.log("Total Price: ", totalPrice)
 
   useEffect(() => {
     dispatch(getTotalPrice());
@@ -29,27 +30,36 @@ const CartPage = () => {
         <p>Your cart is empty.</p>
       ) : (
         <div>
-          {cartItems.map((cartItem, index) => (
-            <React.Fragment key={index}>
-            <div key={cartItem.id} className="flex justify-between items-center border-b border-gray-200 py-4">
-              <div className="flex flex-col md:flex-row items-center">
-                <img src={`${baseUrl}${cartItem.item.image}`} alt={cartItem.item.name} className="w-[500px] h-[400px] mr-4" />
-                <div>
-                  <h2 className="text-lg font-semibold">{cartItem.item.name}</h2>
-                  <p className="text-sm text-gray-500">Price: Ksh {cartItem.item.price}</p>
-                  <p className="text-sm text-gray-500">Description: {cartItem.item.description}</p>
+            {cartItems.map((cartItem, index) => (
+        <div key={index}>
+          {/* Check if cartItem and cartItem.cart_items are defined */}
+          {cartItem.cart_items && Object.keys(cartItem.cart_items).map((type, subIndex) => (
+            cartItem.cart_items[type].map((item, itemIndex) => (
+              <div key={itemIndex} className="flex justify-between items-center border-b border-gray-200 py-4">
+                <div className="flex items-center">
+                  {item.image && (
+                    <img src={`${baseUrl}${item.image}`} alt={item.name} className="w-[400px] h-[400px] mr-4" />
+                  )}
+                  <div>
+                    <h2 className="text-lg font-semibold">{item.name}</h2>
+                    <p className="text-sm text-gray-500">Price: Ksh {item.price}</p>
+                    <p className="text-sm text-gray-500">Description: {item.description}</p>
+                  </div>
                 </div>
+                <button
+                  className="text-sm text-red-500 hover:text-red-700"
+                  onClick={() => handleRemoveFromCart(item.id)}
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                className="text-sm text-red-500 hover:text-red-700"
-                onClick={() => handleRemoveFromCart(cartItem.item.id)}
-              >
-                Remove
-          </button>
-        </div>
-
-            </React.Fragment>
+            ))
           ))}
+        </div>
+      ))}
+
+
+
           <div className="mt-4">
             <h2 className="text-lg font-semibold text-light">Total Price: Ksh{totalPrice}</h2>
           </div>

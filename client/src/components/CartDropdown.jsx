@@ -8,6 +8,7 @@ const CartDropdown = () => {
   const dispatch = useDispatch();
   const cartReducer = useSelector(state => state.cart);
   const cartItems = cartReducer.cartItems || [];
+  console.log("Cart Items: ", cartItems)
 
   // console.log("Cart Items:", cartItems)
 
@@ -45,21 +46,30 @@ const CartDropdown = () => {
       {isOpen && (
         <div className="absolute bottom right-0 w-56 bg-white rounded-lg shadow-lg cursor-pointer">
           <ul className="py-2">
-          {cartItems.map((cartItem, index) => (
-            <React.Fragment key={index}>
-              <li className="px-4 py-2 border-b border-gray-200">
-                <p className="text-sm text-gray-800">{cartItem.item.name || 'Product Name Not Available'}</p>
-                <p className="text-xs text-gray-500">Price: ${cartItem.item.price || 'Price Not Available'}</p>
-                <button
-                  type="button"
-                  className="text-xs text-red-500 hover:text-red-700"
-                  onClick={() => handleRemoveFromCart(cartItem.item.id)} // Accessing item.id
-                >
-                  Remove
-                </button>
-              </li>
-            </React.Fragment>
-          ))}
+            {cartItems.map((cartItem, index) => (
+                <React.Fragment key={index}>
+                  {/* Iterate over each item type */}
+                  {Object.entries(cartItem.cart_items).map(([itemType, items]) => (
+                    <React.Fragment key={itemType}>
+                      {/* Iterate over items of each type */}
+                      {items.map((item, itemIndex) => (
+                        <li key={itemIndex} className="px-4 py-2 border-b border-gray-200">
+                          <p className="text-sm text-gray-800">{item.name || 'Product Name Not Available'}</p>
+                          <p className="text-xs text-gray-500">Price: ${item.price || 'Price Not Available'}</p>
+                          <button
+                            type="button"
+                            className="text-xs text-red-500 hover:text-red-700"
+                            onClick={() => handleRemoveFromCart(item.id)}
+                          >
+                            Remove
+                          </button>
+                        </li>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
+
           </ul>
           <div className="px-4 py-2 border-t border-gray-200">
             <p className="text-sm text-gray-800">Total: Ksh {totalPrice}</p>

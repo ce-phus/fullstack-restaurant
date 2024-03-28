@@ -56,7 +56,7 @@ export const removeFromCart = (item_id) => async (dispatch) => {
         dispatch(getTotalPrice());
     } catch (error) {
         // Error handling code
-        dispatch({ type: REMOVE_FROM_CART_FAILURE, payload: error.message });
+        dispatch({ type: REMOVE_FROM_CART_FAIL, payload: error.message });
     }
 };
 

@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from payments.validators import validate_possible_number
 
 class UserSerializer(serializers.ModelSerializer):
-    admin = serializers.SerializerMethodField(read_only=True)
+    admin = serializers.SerializerMethodField(source='is_staff', read_only=True)
 
     class Meta:
         model=User
