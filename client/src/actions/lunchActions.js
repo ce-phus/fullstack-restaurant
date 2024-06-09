@@ -141,7 +141,7 @@ export const deletelunch = (id) => async (dispatch, getstate) => {
 
         // api call
         const { data } = await axios.delete(
-            `http://127.0.0.1:8000/menu/lunch-delete/${id}`,
+            `http://127.0.0.1:8000/menu/lunch-delete/${id}/`,
             config
         )
 

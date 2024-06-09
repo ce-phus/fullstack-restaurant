@@ -235,9 +235,9 @@ class CartAPIView(APIView):
             quantity = int(request.data.get("quantity", 1))
 
             cart_service.add_item(item_type, item_id, quantity)
-
-            cart_details = cart_service.get_cart_details()
             total_price = cart_service.get_total_price()
+            cart_details = cart_service.get_cart_details()
+            
 
             return Response({"cart_items": cart_details, "total_price": str(total_price)}, status=status.HTTP_200_OK)
         elif action == "remove_item":
@@ -253,3 +253,8 @@ class CartAPIView(APIView):
             return Response({"detail": "Cart cleared"}, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "Invalid action"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    def get(self, request, *args, **kwargs):
+        cart_service = CartService(request)
+        total_price = cart_service.get_total_price()
+        return Response({"total_price": str(total_price)}, status=status.HTTP_200_OK)

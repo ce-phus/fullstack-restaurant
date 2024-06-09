@@ -10,7 +10,6 @@ const CartDropdown = () => {
   const cartItems = cartReducer.cartItems || [];
   console.log("Cart Items: ", cartItems)
 
-  // console.log("Cart Items:", cartItems)
 
   // Calculate total price by summing up cart_total_price of each entry in cartItems
   const totalPrice = cartItems.reduce((acc, curr) => acc + curr.cart_total_price, 0);

@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { fadeIn, textVariant } from "../utils/motion";
 import BreakfastCard from './BreakfastCard'; 
 import { styles } from '../styles';
-import SectionWrapper from "../hoc/SectionWrapper"; // Correct import for SectionWrapper
+import SectionWrapper from "../hoc/SectionWrapper"; 
 
-const MenuList = ({ breakfastList, lunchList }) => {
+const MenuList = ({ breakfastList }) => {
   return (
     <>
      <SectionWrapper>

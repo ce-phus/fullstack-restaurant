@@ -61,7 +61,7 @@ export const getBreakfastDetails = (id) => async (dispatch) =>{
         })
 
         // call api
-        const { data } = await axios.get(`http://127.0.0.1:8000/menu/breakfast/${id}`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/menu/breakfast/${id}/`)
         dispatch({
             type: BREAKFAST_DETAILS_SUCCESS,
             payload: data
@@ -87,7 +87,7 @@ export const createbreakfast = (breakfast) => async (dispatch, getState) => {
 
         const config = {
             headers: {
-                "Content-Type": "multipart/form-dat",
+                "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
@@ -130,7 +130,7 @@ export const deletebreakfast = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `http://127.0.0.1:8000/menu/breakfast-delete/${id}`,
+            `http://127.0.0.1:8000/menu/breakfast-delete/${id}/`,
             config
         )
 

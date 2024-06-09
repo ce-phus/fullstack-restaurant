@@ -32,6 +32,7 @@ class CartService:
             serializer = self.get_serializer(item_type, item)
             self.cart[item_id_str]["details"] = serializer.data
             self.cart[item_id_str]["quantity"] += quantity
+        print("Cart after adding item:", self.cart) 
         
         self.save()
 
